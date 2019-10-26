@@ -3,14 +3,14 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
     
     create_table(:users) do |t|
       ## Required
-      t.string :provider, :null => false, :default => "email"
-      t.string :uid, :null => false, :default => ""
+      t.string :provider, :null => false, :default => "email", limit: 191
+      t.string :uid, :null => false, :default => "", limit: 191
 
       ## Database authenticatable
-      t.string :encrypted_password, :null => false, :default => ""
+      t.string :encrypted_password, :null => false, :default => "", limit: 191
 
       ## Recoverable
-      t.string   :reset_password_token
+      t.string   :reset_password_token, limit: 191
       t.datetime :reset_password_sent_at
       t.boolean  :allow_password_change, :default => false
 
@@ -21,14 +21,14 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.integer  :sign_in_count, default: 0, null: false
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
-      t.string   :current_sign_in_ip
-      t.string   :last_sign_in_ip
+      t.string   :current_sign_in_ip, limit: 191
+      t.string   :last_sign_in_ip, limit: 191
 
       ## Confirmable
-      t.string   :confirmation_token
+      t.string   :confirmation_token, limit: 191
       t.datetime :confirmed_at
       t.datetime :confirmation_sent_at
-      t.string   :unconfirmed_email # Only if using reconfirmable
+      t.string   :unconfirmed_email, limit: 191 # Only if using reconfirmable
 
       ## Lockable
       # t.integer  :failed_attempts, :default => 0, :null => false # Only if lock strategy is :failed_attempts
@@ -36,10 +36,10 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       # t.datetime :locked_at
 
       ## User Info
-      t.string :name
-      t.string :nickname
-      t.string :image
-      t.string :email
+      t.string :name, limit: 191
+      t.string :nickname, limit: 191
+      t.string :image, limit: 191
+      t.string :email, limit: 191
 
       ## Tokens
       t.text :tokens

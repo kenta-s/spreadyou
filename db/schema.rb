@@ -10,29 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_26_124919) do
+ActiveRecord::Schema.define(version: 2019_10_26_131717) do
+
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "summary", null: false
+    t.text "description", null: false
+    t.string "url", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_products_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "provider", default: "email", null: false
-    t.string "uid", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
+    t.string "provider", limit: 191, default: "email", null: false
+    t.string "uid", limit: 191, default: "", null: false
+    t.string "encrypted_password", limit: 191, default: "", null: false
+    t.string "reset_password_token", limit: 191
     t.datetime "reset_password_sent_at"
     t.boolean "allow_password_change", default: false
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "confirmation_token"
+    t.string "current_sign_in_ip", limit: 191
+    t.string "last_sign_in_ip", limit: 191
+    t.string "confirmation_token", limit: 191
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.string "name"
-    t.string "nickname"
-    t.string "image"
-    t.string "email"
+    t.string "unconfirmed_email", limit: 191
+    t.string "name", limit: 191
+    t.string "nickname", limit: 191
+    t.string "image", limit: 191
+    t.string "email", limit: 191
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -42,4 +52,5 @@ ActiveRecord::Schema.define(version: 2019_10_26_124919) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "products", "users"
 end
