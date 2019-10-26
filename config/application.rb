@@ -36,5 +36,7 @@ module Spreadyou
       g.assets false
       g.template_engine false
     end
+    
+    config.api_only = true
   end
 end
