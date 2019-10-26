@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
 
   has_many :products, dependent: :destroy
   has_one :status, dependent: :destroy
+
+  validates :name, presence: true, length: { minimum: 3, maximum: 20 }
 end
