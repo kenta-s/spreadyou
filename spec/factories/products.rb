@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :product do
-    summary { "MyString" }
+    summary { "未経験エンジニアのためのオンラインプログラミングスクール" }
     description { "MyText" }
-    url { "MyString" }
-    user { nil }
+    url { "https://proprogramming.example.com" }
+    association :user, factory: :user
   end
 end
