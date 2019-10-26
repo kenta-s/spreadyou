@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_26_135339) do
+ActiveRecord::Schema.define(version: 2019_10_26_140209) do
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "summary", null: false
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2019_10_26_135339) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_statuses_on_user_id"
+  end
+
+  create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "tweet_id_on_twitter", null: false
+    t.string "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -62,4 +71,5 @@ ActiveRecord::Schema.define(version: 2019_10_26_135339) do
 
   add_foreign_key "products", "users"
   add_foreign_key "statuses", "users"
+  add_foreign_key "tweets", "users"
 end
