@@ -27,6 +27,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 gem 'devise_token_auth'
+gem 'omniauth'
+gem 'omniauth-twitter'
 gem 'twitter'
 
 group :development, :test do

@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :tweets, dependent: :destroy
   has_one :status, dependent: :destroy
 
-  validates :name, presence: true, length: { minimum: 3, maximum: 20 }
+  # validates :name, presence: true, length: { minimum: 3, maximum: 20 }
 
   def gain_sp_point!(point)
     self.status ||= Status.new(spread_point: 0)

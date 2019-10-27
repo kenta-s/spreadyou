@@ -71,7 +71,7 @@ RSpec.describe "Api::V1::Tweet", type: :request do
     end
 
     context "with invalid params" do
-      it "renders a JSON response with errors for the new hoge" do
+      it "renders a JSON response with errors for the new tweet" do
 
         post "/api/v1/tweets", params: {tweet: invalid_attributes}, headers: valid_headers
         expect(response).to have_http_status(:unprocessable_entity)
@@ -80,7 +80,7 @@ RSpec.describe "Api::V1::Tweet", type: :request do
     end
 
     context "with invalid headers" do
-      it "renders a JSON response with errors for the new hoge" do
+      it "renders a JSON response with errors for the new tweet" do
 
         post "/api/v1/tweets", params: {tweet: valid_attributes}, headers: invalid_headers
         expect(response).to have_http_status(:unauthorized)
