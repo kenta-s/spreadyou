@@ -12,7 +12,18 @@ class Api::V1::TweetsController < ApplicationController
 
   # POST /api/v1/tweets.json
   def create
+    text = tweet_params.dig(:content)
+    # use Twitter API
+    res = twitter_client.update(text)
+    res.text
+    # "ほげ"
+    res.id.to_s
+    # "1188355354834325506"
+    res.url.to_s
+    # "https://twitter.com/kenta_s_dev/status/1188355354834325506"
     @tweet = Tweet.new(tweet_params)
+
+    # current_user.point_up
 
     if @tweet.save
       render :show, status: :created, location: @tweet
@@ -29,6 +40,6 @@ class Api::V1::TweetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tweet_params
-      params.fetch(:tweet, {}).permit(:product_id)
+      params.fetch(:tweet, {}).permit(:product_id, :content)
     end
 end
