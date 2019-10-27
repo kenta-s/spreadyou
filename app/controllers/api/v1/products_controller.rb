@@ -2,18 +2,15 @@ class Api::V1::ProductsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :destroy]
   before_action :set_product, only: [:show, :update, :destroy]
 
-  # GET /api/v1/products
   # GET /api/v1/products.json
   def index
     @products = Product.all.order(created_at: :desc)
   end
 
-  # GET /api/v1/products/1
   # GET /api/v1/products/1.json
   def show
   end
 
-  # POST /api/v1/products
   # POST /api/v1/products.json
   def create
     @product = current_user.products.new(product_params)
@@ -25,7 +22,6 @@ class Api::V1::ProductsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /api/v1/products/1
   # PATCH/PUT /api/v1/products/1.json
   def update
     if @product.update(product_params)
@@ -35,7 +31,6 @@ class Api::V1::ProductsController < ApplicationController
     end
   end
 
-  # DELETE /api/v1/products/1
   # DELETE /api/v1/products/1.json
   def destroy
     @product.destroy
