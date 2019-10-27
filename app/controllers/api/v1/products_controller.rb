@@ -1,4 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   before_action :set_product, only: [:show, :update, :destroy]
 
   # GET /api/v1/products
@@ -18,7 +19,7 @@ class Api::V1::ProductsController < ApplicationController
     @product = current_user.products.new(product_params)
 
     if @product.save
-      render :show, status: :created, location: @product
+      render :show, status: :created
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -28,7 +29,7 @@ class Api::V1::ProductsController < ApplicationController
   # PATCH/PUT /api/v1/products/1.json
   def update
     if @product.update(product_params)
-      render :show, status: :ok, location: @product
+      render :show, status: :ok
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -48,6 +49,6 @@ class Api::V1::ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.fetch(:product, {})
+      params.fetch(:product, {}).permit(:summary, :description, :url)
     end
 end
