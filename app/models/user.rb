@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :products, dependent: :destroy
+  has_many :tweets, dependent: :destroy
   has_one :status, dependent: :destroy
 
   validates :name, presence: true, length: { minimum: 3, maximum: 20 }
