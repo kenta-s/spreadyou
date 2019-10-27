@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
-  before_action :set_api_v1_product, only: [:show, :update, :destroy]
+  before_action :set_product, only: [:show, :update, :destroy]
 
   # GET /api/v1/products
   # GET /api/v1/products.json
