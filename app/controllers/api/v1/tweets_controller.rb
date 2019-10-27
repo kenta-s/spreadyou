@@ -12,6 +12,7 @@ class Api::V1::TweetsController < ApplicationController
 
   # POST /api/v1/tweets.json
   def create
+    product = Product.find(tweet_params[:product_id])
     text = tweet_params.dig(:content)
     # use Twitter API
     res = twitter_client.update(text)
@@ -21,9 +22,14 @@ class Api::V1::TweetsController < ApplicationController
     # "1188355354834325506"
     res.url.to_s
     # "https://twitter.com/kenta_s_dev/status/1188355354834325506"
-    @tweet = Tweet.new(tweet_params)
+    # @tweet = Tweet.new(tweet_params)
+    @tweet = current_user.tweets.new(
+      tweet_id_on_twitter: res.id.to_s,
+      tweet_url: res.url.to_s,
+      content: res.text,
+    )
 
-    # current_user.point_up
+    current_user.gain_sp_point!
 
     if @tweet.save
       render :show, status: :created, location: @tweet
