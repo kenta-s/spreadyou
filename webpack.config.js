@@ -61,7 +61,6 @@ const config = {
     }),
     new webpack.ExtendedAPIPlugin(),
   ],
-  target: 'node',
 }
 
 const mainConfig = mode => {
@@ -70,6 +69,11 @@ const mainConfig = mode => {
       server: './server.js',
       // 'static/bundle': './client.js',
     },
+    target: 'node',
+    node: {
+      __filename: false,
+      __dirname: false,
+    }
   })
 }
 
