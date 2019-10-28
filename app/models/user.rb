@@ -23,4 +23,14 @@ class User < ActiveRecord::Base
     self.status.spread_point -= point
     self.status.save!
   end
+
+  def sp_point
+    if self.status.nil?
+      self.status ||= Status.new(spread_point: 0)
+      self.status.save
+      return 0
+    else
+      self.status.spread_point
+    end
+  end
 end

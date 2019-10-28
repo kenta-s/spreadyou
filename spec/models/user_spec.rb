@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe "associations" do
     it { should have_many(:products).dependent(:destroy) }
-    # it { should have_many(:tweets).dependent(:destroy) }
     it { should have_one(:status).dependent(:destroy) }
   end
 
@@ -76,6 +75,19 @@ RSpec.describe User, type: :model do
       it "should raise error" do
         expect{ user.consume_sp_point!(1) }.to raise_error(RuntimeError, 'user does not have enough sp point')
       end
+    end
+  end
+
+  describe "#sp_point" do
+    subject { user.sp_point }
+    context "with status" do
+      let(:user) { FactoryBot.create(:user, :with_3_sp_point) }
+      it { is_expected.to eq(3) }
+    end
+
+    context "without status" do
+      let(:user) { FactoryBot.create(:user) }
+      it { is_expected.to eq(0) }
     end
   end
 end

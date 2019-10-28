@@ -4,7 +4,7 @@ class Api::V1::ProductsController < ApplicationController
 
   # GET /api/v1/products.json
   def index
-    @products = Product.all.order(created_at: :desc)
+    @products = Product.approved.order(created_at: :desc)
   end
 
   # GET /api/v1/products/1.json

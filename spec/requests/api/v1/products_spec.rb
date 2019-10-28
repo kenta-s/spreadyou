@@ -28,9 +28,9 @@ RSpec.describe "Api::V1::Products", type: :request do
 
   describe "GET /api/v1/products" do
     before do
-      FactoryBot.create(:product, summary: 'test product 1', created_at: Time.now - 3.seconds)
-      FactoryBot.create(:product, summary: 'test product 2', created_at: Time.now - 2.seconds)
-      FactoryBot.create(:product, summary: 'test product 3', created_at: Time.now - 1.seconds)
+      FactoryBot.create(:product, :approved, summary: 'test product 1', created_at: Time.now - 3.seconds)
+      FactoryBot.create(:product, :approved, summary: 'test product 2', created_at: Time.now - 2.seconds)
+      FactoryBot.create(:product, :approved, summary: 'test product 3', created_at: Time.now - 1.seconds)
     end
 
     it "should return 3 products" do
