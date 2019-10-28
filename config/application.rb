@@ -35,6 +35,8 @@ module Spreadyou
       g.helper false
       g.assets false
       g.template_engine false
+      g.routing_specs false
+      g.controller_specs false
     end
     
     config.api_only = true
