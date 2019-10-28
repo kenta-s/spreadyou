@@ -2,6 +2,12 @@
   "name": "spreadyou",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@babel/preset-stage-0": "^7.0.0",
+    "@material-ui/core": "^4.5.1",
+    "@material-ui/icons": "^4.5.1",
     "axios": "^0.19.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
@@ -10,6 +16,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "connected-react-router": "^6.5.2",
     "css-loader": "^3.2.0",
+    "express": "^4.17.1",
     "file-loader": "^4.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "react": "^16.11.0",
@@ -18,12 +25,18 @@
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.4",
     "redux-flash": "^2.0.2",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "redux-token-auth": "^0.19.0",
     "sass-loader": "^8.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-manifest-plugin": "^2.2.0"
+  },
+  "scripts": {
+    "build": "webpack --mode=production",
+    "dev": "webpack --mode=development",
+    "heroku-postbuild": "webpack --mode=production"
   },
   "version": "0.1.0"
 }

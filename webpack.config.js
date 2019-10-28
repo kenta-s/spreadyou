@@ -1,0 +1,105 @@
+const ManifestPlugin = require('webpack-manifest-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+const webpack = require('webpack');
+
+const config = {
+  context: path.resolve(__dirname, 'frontend'),
+  output: {
+    path: path.resolve(__dirname, 'public', 'frontend'),
+    filename: '[name]-[hash].js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(jpg|jpeg|png|svg|webp)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'images/',
+              publicPath: '/frontend/images',
+              emitFile: true,
+            },
+          },
+        ]
+      },
+      {
+        test: /\.(js)$/,
+        loaders: 'babel-loader',
+        query: {
+          presets: ['@babel/preset-react', '@babel/preset-env'],
+        }
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              url: true,
+            }
+          },
+          {
+            loader:'sass-loader',
+          }
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new ManifestPlugin({
+      fileName: 'manifest.json',
+      publicPath: '/',
+      writeToFileEmit: true,
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name]-[hash].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: false,
+    }),
+    new webpack.ExtendedAPIPlugin(),
+  ],
+  target: 'node',
+}
+
+const mainConfig = mode => {
+  return Object.assign({}, config, {
+    entry: {
+      server: './server.js',
+      // 'static/bundle': './client.js',
+    },
+  })
+}
+
+const clientConfig = {
+  target: 'web',
+  context: path.resolve(__dirname, 'frontend'),
+  output: {
+    path: path.resolve(__dirname, 'public', 'frontend', 'static'),
+    filename: 'bundle.js'
+  },
+  entry: {
+    bundle: './client.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        loaders: 'babel-loader',
+        query: {
+          presets: ['@babel/preset-react', '@babel/preset-env'],
+        }
+      },
+    ],
+  },
+}
+
+module.exports = (env, argv) => {
+  const mode = argv.mode === 'production' ? 'production' : 'development'
+  return [
+    mainConfig(mode),
+    clientConfig,
+  ]
+}
