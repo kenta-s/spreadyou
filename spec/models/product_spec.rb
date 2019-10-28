@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Product, type: :model do
   describe "associations" do
     it { should belong_to(:user) }
+    it { should have_many(:tweets).dependent(:destroy) }
   end
 
   describe "validations" do
