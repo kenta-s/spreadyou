@@ -13,18 +13,8 @@ import App from './containers/App'
 const app = Express()
 const port = 3000
 
-// const path = require('path')
-
-// const staticPath = path.resolve(__dirname, 'static')
 const staticPath = path.join(__dirname, 'static')
-//Serve static files
-// app.use('/static', Express.static('static'))
-// console.log(path.resolve(__dirname, 'static'))
-console.log(staticPath)
-// app.use('/static', Express.static(staticPath))
-
-// TODO: fix path
-app.use('/static', Express.static('/home/kenta-s/Repositories/spreadyou/public/frontend/static'))
+app.use('/static', Express.static(staticPath))
 
 // This is fired every time the server side receives a request
 app.use(handleRender)

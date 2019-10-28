@@ -1,10 +1,10 @@
 class Api::V1::ProductsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :authenticate_user!
   before_action :set_product, only: [:show, :update, :destroy]
 
   # GET /api/v1/products.json
   def index
-    @products = Product.approved.order(created_at: :desc)
+    @products = Product.includes(user: :status).where.not(user: current_user).approved.where('statuses.spread_point > 0').references(:statuses).order(spread_at: :asc).order(created_at: :desc).limit(10)
   end
 
   # GET /api/v1/products/1.json

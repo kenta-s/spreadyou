@@ -13,7 +13,11 @@ class Api::V1::TweetsController < ApplicationController
 
   # POST /api/v1/tweets.json
   def create
-    if tweet!
+    @tweet = current_user.tweets.new(
+      product: Product.find_by(id: tweet_params.dig(:product_id)),
+      content: tweet_params.dig(:content),
+    )
+    if @tweet.save
       render :show, status: :created
     else
       render json: {}, status: :unprocessable_entity
@@ -32,28 +36,36 @@ class Api::V1::TweetsController < ApplicationController
     end
 
     def tweet!
-      Tweet.transaction do
-        product = Product.find_by(id: tweet_params[:product_id])
-        return false if product.blank? || product.user == current_user
-        content = tweet_params.dig(:content)
-        text = "#{content} #{product.url}\n\n---あなたもspreadyouでプロダクトを広めてみませんか？ https://www.spreadyou.net"
-        res = twitter_client.update(text)
-        # res.text
-        # => "ほげ"
-        # res.id.to_s
-        # => "1188355354834325506"
-        # res.url.to_s
-        # => "https://twitter.com/kenta_s_dev/status/1188355354834325506"
-        # @tweet = Tweet.new(tweet_params)
-        @tweet = product.tweets.create!(
-          tweet_id_on_twitter: res.id.to_s,
-          tweet_url: res.url.to_s,
-          content: res.text,
-        )
 
-        current_user.gain_sp_point!(3)
-        product.user.consume_sp_point!(1)
-      end
+      # check params
+      # if true
+      #   TweetProductJob.perform_later(user_id: current_user.id, product_id: tweet_params[:product_id], tweet_content: tweet_params.dig(:content))
+      #   true
+      # else
+      #   false
+      # end
+      # Tweet.transaction do
+      #   product = Product.find_by(id: tweet_params[:product_id])
+      #   return false if product.blank? || product.user == current_user
+      #   content = tweet_params.dig(:content)
+      #   text = "#{content} #{product.url}\n\n---あなたもspreadyouでプロダクトを広めてみませんか？ https://www.spreadyou.net"
+      #   res = twitter_client.update(text)
+      #   # res.text
+      #   # => "ほげ"
+      #   # res.id.to_s
+      #   # => "1188355354834325506"
+      #   # res.url.to_s
+      #   # => "https://twitter.com/kenta_s_dev/status/1188355354834325506"
+      #   # @tweet = Tweet.new(tweet_params)
+      #   @tweet = product.tweets.create!(
+      #     tweet_id_on_twitter: res.id.to_s,
+      #     tweet_url: res.url.to_s,
+      #     content: res.text,
+      #   )
+
+      #   current_user.gain_sp_point!(3)
+      #   product.user.consume_sp_point!(1)
+      # end
 
       true
     end

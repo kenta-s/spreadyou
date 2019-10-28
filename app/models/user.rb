@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  has_many :tweets, dependent: :destroy
   has_many :products, dependent: :destroy
   has_one :status, dependent: :destroy
 
@@ -31,6 +32,16 @@ class User < ActiveRecord::Base
       return 0
     else
       self.status.spread_point
+    end
+  end
+
+  # http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=https://www.example.com
+  def twitter_client
+    @twitter_client ||= Twitter::REST::Client.new do |config|
+      config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
+      config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
+      # config.access_token        = "YOUR_ACCESS_TOKEN"
+      # config.access_token_secret = "YOUR_ACCESS_SECRET"
     end
   end
 end

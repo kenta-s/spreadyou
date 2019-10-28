@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.text :description, null: false
       t.string :url, null: false
       t.integer :status, null: false, default: 0
+      t.datetime :spread_at, index: true
 
       t.timestamps
     end

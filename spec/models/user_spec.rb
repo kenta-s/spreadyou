@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe "associations" do
+    it { should have_many(:tweets).dependent(:destroy) }
     it { should have_many(:products).dependent(:destroy) }
     it { should have_one(:status).dependent(:destroy) }
   end
@@ -88,6 +89,14 @@ RSpec.describe User, type: :model do
     context "without status" do
       let(:user) { FactoryBot.create(:user) }
       it { is_expected.to eq(0) }
+    end
+  end
+
+  xdescribe "#twitter_client" do
+    let(:user) { FactoryBot.build(:user) }
+    let(:client) { user.twitter_client }
+    it "should be a TwitterClient" do
+      expect(Twitter::REST::Client).to receive(:new).with()
     end
   end
 end

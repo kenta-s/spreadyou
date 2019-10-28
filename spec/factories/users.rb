@@ -12,5 +12,9 @@ FactoryBot.define do
     trait :with_3_sp_point do |user|
       status { Status.new(spread_point: 3) }
     end
+    trait :with_0_sp_point do |user|
+      status { Status.new(spread_point: 0) }
+    end
+    initialize_with { User.find_or_create_by(email: email)}
   end
 end

@@ -27,13 +27,13 @@ RSpec.describe "Api::V1::Tweet", type: :request do
     {}
   }
 
-  let(:client) {
-    instance_double('twitter client')
-  }
+  # let(:client) {
+  #   instance_double('twitter client')
+  # }
 
-  before(:each) do
-    allow_any_instance_of(ApplicationController).to receive(:twitter_client).and_return(client)
-  end
+  # before(:each) do
+  #   allow_any_instance_of(ApplicationController).to receive(:twitter_client).and_return(client)
+  # end
 
   xdescribe "GET /api/v1/tweets" do
   end
@@ -42,16 +42,16 @@ RSpec.describe "Api::V1::Tweet", type: :request do
   end
 
   describe "POST /api/v1/tweets" do
-    let(:tweet_response) do
-      instance_double('tweet object')
-    end
+    # let(:tweet_response) do
+    #   instance_double('tweet object')
+    # end
     context "with valid params" do
-      before do
-        expect(client).to receive(:update).with("これ良いです https://proprogramming.example.com\n\n---あなたもspreadyouでプロダクトを広めてみませんか？ https://www.spreadyou.net").and_return(tweet_response).once
-        expect(tweet_response).to receive(:text).and_return("これ良いです https://proprogramming.example.com\n\n---あなたもspreadyouでプロダクトを広めてみませんか？ https://www.spreadyou.net").once
-        expect(tweet_response).to receive(:id).and_return(12345678).once
-        expect(tweet_response).to receive(:url).and_return('https://www.example.com/hoge/status/12345678').once
-      end
+      # before do
+      #   expect(client).to receive(:update).with("これ良いです https://proprogramming.example.com\n\n---あなたもspreadyouでプロダクトを広めてみませんか？ https://www.spreadyou.net").and_return(tweet_response).once
+      #   expect(tweet_response).to receive(:text).and_return("これ良いです https://proprogramming.example.com\n\n---あなたもspreadyouでプロダクトを広めてみませんか？ https://www.spreadyou.net").once
+      #   expect(tweet_response).to receive(:id).and_return(12345678).once
+      #   expect(tweet_response).to receive(:url).and_return('https://www.example.com/hoge/status/12345678').once
+      # end
  
       it "creates a new Tweet" do
         expect {
@@ -65,8 +65,9 @@ RSpec.describe "Api::V1::Tweet", type: :request do
         res = JSON(response.body)
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(res["content"]).to eq("これ良いです https://proprogramming.example.com\n\n---あなたもspreadyouでプロダクトを広めてみませんか？ https://www.spreadyou.net")
-        expect(res["tweet_url"]).to eq("https://www.example.com/hoge/status/12345678")
+        expect(res["content"]).to eq("これ良いです")
+        expect(res["tweet_url"]).to be_nil
+        expect(res["status"]).to eq("pending")
       end
     end
 

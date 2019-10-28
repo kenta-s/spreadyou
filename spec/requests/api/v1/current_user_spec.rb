@@ -12,7 +12,7 @@ RSpec.describe "Api::V1::CurrentUser", type: :request do
 
   describe "GET /api/v1/current_user" do
     context "with valid headers" do
-      let(:user) { FactoryBot.create(:user, image: 'https://www.foo.jpg') }
+      let(:user) { FactoryBot.create(:user, name: 'foo_bar', image: 'https://www.foo.jpg') }
 
       before do
         user.status ||= Status.new(spread_point: 3)
@@ -22,7 +22,7 @@ RSpec.describe "Api::V1::CurrentUser", type: :request do
         get "/api/v1/current_user", headers: valid_headers
         json = JSON(response.body)
         expect(response).to have_http_status(200)
-        expect(json["name"]).to eq("foo1")
+        expect(json["name"]).to eq("foo_bar")
         expect(json["image"]).to eq("https://www.foo.jpg")
         expect(json["spPoint"]).to eq(3)
       end
