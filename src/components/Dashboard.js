@@ -26,6 +26,7 @@ import Orders from './Orders';
 import Products from './Products';
 import MyProducts from './MyProducts';
 import UserInfo from './UserInfo';
+import TwitterConnected from './TwitterConnected';
 import PageNotFound from './PageNotFound';
 
 function Copyright() {
@@ -185,6 +186,7 @@ const Dashboard = ({history}) => {
                   <Route exact path="/products" component={Products} />
                   <Route exact path="/my_products" component={MyProducts} />
                   <Route exact path="/user_info" component={UserInfo} />
+                  <Route exact path="/twitter_connected" component={TwitterConnected} />
 									<Route component={PageNotFound} />
                 </Switch>
               </Paper>
