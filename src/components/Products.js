@@ -31,7 +31,9 @@ const useStyles = makeStyles(theme => ({
 const Products = () => {
   const classes = useStyles();
   return (
-    <Chart />
+    <div>
+      TODO: product information here
+    </div>
   )
 }
 

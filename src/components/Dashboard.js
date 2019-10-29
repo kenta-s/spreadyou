@@ -24,6 +24,8 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import Products from './Products';
+import MyProducts from './MyProducts';
+import UserInfo from './UserInfo';
 import PageNotFound from './PageNotFound';
 
 function Copyright() {
@@ -122,7 +124,7 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = ({history}) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -177,10 +179,12 @@ const Dashboard = ({history}) => {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
+            <Grid item xs={12}>
               <Paper className={fixedHeightPaper}>
                 <Switch>
                   <Route exact path="/products" component={Products} />
+                  <Route exact path="/my_products" component={MyProducts} />
+                  <Route exact path="/user_info" component={UserInfo} />
 									<Route component={PageNotFound} />
                 </Switch>
               </Paper>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from "react-redux"
 import { withRouter } from 'react-router'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -11,30 +12,18 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
-const SecondaryListItems = () => {
+const SecondaryListItems = ({history}) => {
   return(
     <div>
-      <ListSubheader inset>Saved reports</ListSubheader>
-      <ListItem button>
+      <ListSubheader inset>ユーザー情報</ListSubheader>
+      <ListItem button onClick={() => history.push('/user_info')}>
         <ListItemIcon>
           <AssignmentIcon />
         </ListItemIcon>
-        <ListItemText primary="Current month" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <AssignmentIcon />
-        </ListItemIcon>
-        <ListItemText primary="Last quarter" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <AssignmentIcon />
-        </ListItemIcon>
-        <ListItemText primary="Year-end sale" />
+        <ListItemText primary="情報" />
       </ListItem>
     </div>
   )
 }
 
-export default SecondaryListItems
+export default withRouter(connect(null, null)(SecondaryListItems))

@@ -21,11 +21,11 @@ const MainListItems = ({history}) => {
         </ListItemIcon>
         <ListItemText primary="プロダクト" />
       </ListItem>
-      <ListItem button>
+      <ListItem button onClick={() => history.push('/my_products')}>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
-        <ListItemText primary="Orders" />
+        <ListItemText primary="自分のプロダクト" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>

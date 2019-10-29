@@ -4,9 +4,9 @@ const path = require('path');
 const webpack = require('webpack');
 
 const config = {
-  context: path.resolve(__dirname, 'frontend'),
+  context: path.resolve(__dirname, 'src'),
   output: {
-    path: path.resolve(__dirname, 'public', 'frontend'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name]-[hash].js'
   },
   module: {
@@ -18,7 +18,7 @@ const config = {
             loader: 'file-loader',
             options: {
               outputPath: 'images/',
-              publicPath: '/frontend/images',
+              publicPath: '/src/images',
               emitFile: true,
             },
           },
@@ -79,9 +79,9 @@ const mainConfig = mode => {
 
 const clientConfig = {
   target: 'web',
-  context: path.resolve(__dirname, 'frontend'),
+  context: path.resolve(__dirname, 'src'),
   output: {
-    path: path.resolve(__dirname, 'public', 'frontend', 'static'),
+    path: path.resolve(__dirname, 'dist', 'static'),
     filename: 'bundle.js'
   },
   entry: {
