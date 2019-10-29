@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';
 import { middleware as flashMiddleware } from 'redux-flash'
 import { createLogger } from "redux-logger";
-// import { verifyCredentials } from '../redux-token-auth-config'
+import { verifyCredentials } from './redux-token-auth-config'
 
 const loggerMiddleware = createLogger()
 export const history = createBrowserHistory();
@@ -23,6 +23,6 @@ const store = createStore(
   )
 );
 
-// verifyCredentials(store)
+verifyCredentials(store)
 
 export default store

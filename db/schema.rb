@@ -13,12 +13,15 @@
 ActiveRecord::Schema.define(version: 2019_10_26_140209) do
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "summary", null: false
     t.text "description", null: false
     t.string "url", null: false
-    t.bigint "user_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "spread_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["spread_at"], name: "index_products_on_spread_at"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -32,11 +35,14 @@ ActiveRecord::Schema.define(version: 2019_10_26_140209) do
 
   create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "tweet_id_on_twitter", null: false
-    t.string "tweet_url", null: false
+    t.bigint "product_id", null: false
+    t.string "tweet_id_on_twitter"
+    t.string "tweet_url"
     t.string "content", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_tweets_on_product_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
@@ -72,5 +78,6 @@ ActiveRecord::Schema.define(version: 2019_10_26_140209) do
 
   add_foreign_key "products", "users"
   add_foreign_key "statuses", "users"
+  add_foreign_key "tweets", "products"
   add_foreign_key "tweets", "users"
 end

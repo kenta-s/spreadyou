@@ -35,7 +35,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  # http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=https://www.example.com
+  # http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=http://localhost:5000/twitter_connected
+  #
+  # http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=http://127.0.0.1:3000/api/v1/auth/:provider/callback
   def twitter_client
     @twitter_client ||= Twitter::REST::Client.new do |config|
       config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']

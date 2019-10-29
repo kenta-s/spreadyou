@@ -12,7 +12,7 @@ import App from './containers/App'
 // import Dashboard from './containers/Dashboard/index'
 
 const app = Express()
-const port = 3000
+const port = 5000
 
 const staticPath = path.join(__dirname, 'static')
 app.use('/static', Express.static(staticPath))
