@@ -1,12 +1,13 @@
 import React from 'react'
 import { hydrate } from 'react-dom'
+import { ConnectedRouter } from 'connected-react-router'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import App from './containers/App'
-import spreadyouStore from './store'
+import store, { history } from './store'
 // import counterApp from './reducers'
 
-import store from './defaultStore'
+// import store, { history } from './defaultStore'
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__
 
@@ -18,7 +19,9 @@ delete window.__PRELOADED_STATE__
 
 hydrate(
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 )

@@ -7,8 +7,9 @@ import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
 import { createStore } from "redux";
 // import counterApp from './reducers'
-import store from './defaultStore'
+import store, { history } from './defaultStore'
 import App from './containers/App'
+// import Dashboard from './containers/Dashboard/index'
 
 const app = Express()
 const port = 3000
@@ -26,7 +27,9 @@ function handleRender(req, res) {
   // Render the component to a string
   const html = renderToString(
     <Provider store={store}>
-      <App />
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
     </Provider>
   )
 
@@ -42,7 +45,9 @@ function renderFullPage(html, preloadedState) {
     <!doctype html>
     <html>
       <head>
-        <title>Redux Universal Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>スプレジュー</title>
       </head>
       <body>
         <div id="root">${html}</div>
