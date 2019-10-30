@@ -26,7 +26,6 @@ import Orders from './Orders';
 import Products from './Products';
 import MyProducts from './MyProducts';
 import UserInfo from './UserInfo';
-import TwitterConnected from './TwitterConnected';
 import PageNotFound from './PageNotFound';
 
 function Copyright() {

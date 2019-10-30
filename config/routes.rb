@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :signin, only: [:index]
   resources :signup, only: [:index]
 
+  resources :twitter_auth_callbacks, only: [:index]
+
   namespace :api, { format: 'json' } do
     namespace :v1 do
       resources :products, only: [:index, :show]

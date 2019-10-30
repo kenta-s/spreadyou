@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
+import { connect } from "react-redux"
+import { withRouter } from 'react-router'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -26,7 +28,6 @@ import Orders from '../components/Orders';
 import Products from '../components/Products';
 import MyProducts from '../components/MyProducts';
 import UserInfo from '../components/UserInfo';
-import TwitterConnected from '../components/TwitterConnected';
 import PageNotFound from '../components/PageNotFound';
 
 function Copyright() {
@@ -123,7 +124,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MainLayout = props => {
+const MainLayout = ({currentUser, history, ...props}) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -133,6 +134,13 @@ const MainLayout = props => {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  React.useEffect(() => {
+    if(!currentUser.isLoading && !currentUser.isSignedIn){
+      // TODO: flash message
+      history.push('/signin')
+    }
+  }, [])
 
   return (
     <div className={classes.root}>
@@ -193,4 +201,13 @@ const MainLayout = props => {
   );
 }
 
-export default MainLayout;
+const mapStateToProps = state => {
+  return { 
+    currentUser: state.reduxTokenAuth.currentUser,
+  }
+};
+
+export default withRouter(connect(
+  mapStateToProps,
+  null
+)(MainLayout));

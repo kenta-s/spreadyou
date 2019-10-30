@@ -77,6 +77,20 @@ const config = {
 //   })
 // }
 
+const serverConfig = mode => {
+  return Object.assign({}, config, {
+    entry: {
+      server: './server.js',
+      // 'static/bundle': './client.js',
+    },
+    target: 'node',
+    node: {
+      __filename: false,
+      __dirname: false,
+    }
+  })
+}
+
 const mainConfig = mode => {
   return Object.assign({}, config, {
     entry: {
@@ -112,6 +126,7 @@ module.exports = (env, argv) => {
   const mode = argv.mode === 'production' ? 'production' : 'development'
   return [
     mainConfig(mode),
+    // serverConfig,
     // clientConfig,
   ]
 }
