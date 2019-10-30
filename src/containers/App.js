@@ -13,17 +13,21 @@ import SignIn from '../components/SignIn';
 import TwitterAuthCallback from '../components/TwitterAuthCallback';
 import PageNotFound from '../components/PageNotFound';
 import { generateRequireSignInWrapper } from 'redux-token-auth'
+import FlashMessages from '../components/FlashMessages'
 
 const App = () => (
-  <Switch>
-    <AppRoute exact path="/products" layout={MainLayout}  component={Products} />
-    <AppRoute exact path="/my_products" layout={MainLayout}  component={MyProducts} />
-    <AppRoute exact path="/user_info"  layout={MainLayout} component={UserInfo} />
-    <AppRoute exact path="/signup"  layout={UserLayout} component={SignUp} />
-    <AppRoute exact path="/signin"  layout={UserLayout} component={SignIn} />
-    <AppRoute exact path="/twitter_auth_callbacks"  layout={UserLayout} component={TwitterAuthCallback} />
-    <AppRoute layout={UserLayout} component={PageNotFound} />
-  </Switch>
+	<div>
+    <Switch>
+      <AppRoute exact path="/products" layout={MainLayout}  component={Products} />
+      <AppRoute exact path="/my_products" layout={MainLayout}  component={MyProducts} />
+      <AppRoute exact path="/user_info"  layout={MainLayout} component={UserInfo} />
+      <AppRoute exact path="/signup"  layout={UserLayout} component={SignUp} />
+      <AppRoute exact path="/signin"  layout={UserLayout} component={SignIn} />
+      <AppRoute exact path="/twitter_auth_callbacks"  layout={UserLayout} component={TwitterAuthCallback} />
+      <AppRoute layout={UserLayout} component={PageNotFound} />
+    </Switch>
+		<FlashMessages />
+	</div>
 )
 
 

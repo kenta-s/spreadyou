@@ -29,6 +29,7 @@ import Products from '../components/Products';
 import MyProducts from '../components/MyProducts';
 import UserInfo from '../components/UserInfo';
 import PageNotFound from '../components/PageNotFound';
+import { flashMessage } from 'redux-flash'
 
 function Copyright() {
   return (
@@ -124,7 +125,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MainLayout = ({currentUser, history, ...props}) => {
+const MainLayout = ({flashMessage, currentUser, history, ...props}) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -138,6 +139,7 @@ const MainLayout = ({currentUser, history, ...props}) => {
   React.useEffect(() => {
     if(!currentUser.isLoading && !currentUser.isSignedIn){
       // TODO: flash message
+      flashMessage('ログインしてください', true)
       history.push('/signin')
     }
   }, [])
@@ -207,7 +209,13 @@ const mapStateToProps = state => {
   }
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    flashMessage: (message, isError) => dispatch(flashMessage(message, {isError: isError})),
+  }
+}
+
 export default withRouter(connect(
   mapStateToProps,
-  null
+  mapDispatchToProps,
 )(MainLayout));
