@@ -39,7 +39,7 @@ module Spreadyou
       g.controller_specs false
     end
     
-    config.api_only = true
+    # config.api_only = true
 
     # for omniauth
     config.session_store :cookie_store, key: '_interslice_session'

@@ -26,3 +26,4 @@
 /node_modules/*
 /public/frontend/*
 /dist/*
+/public/dist/*

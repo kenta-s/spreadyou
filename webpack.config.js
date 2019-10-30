@@ -6,7 +6,7 @@ const webpack = require('webpack');
 const config = {
   context: path.resolve(__dirname, 'src'),
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public', 'dist'),
     filename: '[name]-[hash].js'
   },
   module: {
@@ -51,7 +51,7 @@ const config = {
   plugins: [
     new ManifestPlugin({
       fileName: 'manifest.json',
-      publicPath: '/',
+      publicPath: '/dist/',
       writeToFileEmit: true,
     }),
     new MiniCssExtractPlugin({
@@ -63,17 +63,25 @@ const config = {
   ],
 }
 
+// const mainConfig = mode => {
+//   return Object.assign({}, config, {
+//     entry: {
+//       server: './server.js',
+//       // 'static/bundle': './client.js',
+//     },
+//     target: 'node',
+//     node: {
+//       __filename: false,
+//       __dirname: false,
+//     }
+//   })
+// }
+
 const mainConfig = mode => {
   return Object.assign({}, config, {
     entry: {
-      server: './server.js',
-      // 'static/bundle': './client.js',
+      main: './client.js',
     },
-    target: 'node',
-    node: {
-      __filename: false,
-      __dirname: false,
-    }
   })
 }
 
@@ -81,7 +89,7 @@ const clientConfig = {
   target: 'web',
   context: path.resolve(__dirname, 'src'),
   output: {
-    path: path.resolve(__dirname, 'dist', 'static'),
+    path: path.resolve(__dirname, 'public', 'dist', 'static'),
     filename: 'bundle.js'
   },
   entry: {
@@ -104,6 +112,6 @@ module.exports = (env, argv) => {
   const mode = argv.mode === 'production' ? 'production' : 'development'
   return [
     mainConfig(mode),
-    clientConfig,
+    // clientConfig,
   ]
 }
