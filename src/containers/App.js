@@ -18,7 +18,7 @@ const App = () => (
   <Switch>
     <AppRoute exact path="/products" layout={MainLayout}  component={Products} />
     <AppRoute exact path="/my_products" layout={MainLayout}  component={MyProducts} />
-    <AppRoute exact path="/user_info"  layout={UserLayout} component={UserInfo} />
+    <AppRoute exact path="/user_info"  layout={MainLayout} component={UserInfo} />
     <AppRoute exact path="/signup"  layout={UserLayout} component={SignUp} />
     <AppRoute exact path="/signin"  layout={UserLayout} component={SignIn} />
     <AppRoute exact path="/twitter_auth_callbacks"  layout={UserLayout} component={TwitterAuthCallback} />
