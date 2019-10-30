@@ -6,6 +6,10 @@ import Products from '../components/Products';
 // import Signin from '../components/Signin';
 import MainLayout from './MainLayout';
 import UserLayout from './UserLayout';
+import MyProducts from '../components/MyProducts';
+import UserInfo from '../components/UserInfo';
+import TwitterConnected from '../components/TwitterConnected';
+import PageNotFound from '../components/PageNotFound';
 
 // const App = ({history}) => {
 //   return (
@@ -16,8 +20,10 @@ import UserLayout from './UserLayout';
 const App = () => (
   <div>
     <Switch>
-      <AppRoute exact path="/products" layout={MainLayout} component={Products} />
-      <AppRoute exact path="/signin" layout={UserLayout} component={Products} />
+      <AppRoute exact path="/products" layout={MainLayout}  component={Products} />
+      <AppRoute exact path="/my_products" layout={MainLayout}  component={MyProducts} />
+      <AppRoute exact path="/user_info"  layout={UserLayout} component={UserInfo} />
+			<AppRoute component={PageNotFound} />
     </Switch>
   </div>
 )
