@@ -5,7 +5,7 @@ class Api::V1::MyProductsController < ApplicationController
   # GET /api/v1/my_products
   # GET /api/v1/my_products.json
   def index
-    @my_products = current_user.products
+    @my_products = current_user.products.includes(:tweets)
   end
 
   # GET /api/v1/my_products/1
@@ -44,7 +44,7 @@ class Api::V1::MyProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_my_product
-      @my_product = Product.find(params[:id])
+      @my_product = Product.includes(:tweets).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

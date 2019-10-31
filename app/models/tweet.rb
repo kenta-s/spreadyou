@@ -4,6 +4,7 @@ class Tweet < ApplicationRecord
   # validates :tweet_id_on_twitter, presence: true
   # validates :tweet_url, presence: true
   validates :content, presence: true, length: { maximum: 20 }
+  validates :user, uniqueness: { scoped: :product }
   validate :user_cannot_be_product_user
 
   enum status: {

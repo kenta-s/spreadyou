@@ -59,6 +59,23 @@ RSpec.describe "Api::V1::MyProducts", type: :request do
 
   end
 
+  describe "GET /api/v1/my_products/:id" do
+    let(:user) { FactoryBot.create(:user) }
+    let!(:product) { FactoryBot.create(:product, summary: 'test product 1', user: user) }
+
+    before do
+      product.tweets << FactoryBot.create(:tweet, tweet_id_on_twitter: '12345', tweet_url: 'http://www.example.com/12345')
+    end
+
+    it "should return a product" do
+      get "/api/v1/my_products/#{product.id}", headers: valid_headers
+      json = JSON(response.body)
+      expect(response).to have_http_status(200)
+      expect(json["summary"]).to eq("test product 1")
+      expect(json["tweets"][0]["tweet_url"]).to eq("http://www.example.com/12345")
+    end
+  end
+
   describe "POST /api/v1/my_products" do
     let(:user) { FactoryBot.create(:user) }
     context "with valid params" do
