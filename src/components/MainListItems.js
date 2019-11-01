@@ -5,45 +5,23 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import StarsIcon from '@material-ui/icons/Stars';
+import ViewListIcon from '@material-ui/icons/ViewList';
 
 const MainListItems = ({history}) => {
   return(
     <div>
       <ListItem button onClick={() => history.push('/spreadee')}>
         <ListItemIcon>
-          <DashboardIcon />
+          <StarsIcon />
         </ListItemIcon>
         <ListItemText primary="プロダクト" />
       </ListItem>
       <ListItem button onClick={() => history.push('/my_products')}>
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <ViewListIcon />
         </ListItemIcon>
         <ListItemText primary="自分のプロダクト" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Customers" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <BarChartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Reports" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <LayersIcon />
-        </ListItemIcon>
-        <ListItemText primary="Integrations" />
       </ListItem>
     </div>
 	)
