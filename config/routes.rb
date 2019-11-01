@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :my_products
       resources :tweets
       resources :current_user, only: [:index]
+      resources :spreadee, only: [:index]
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
