@@ -7,6 +7,7 @@ import Products from '../components/Products';
 import MainLayout from './MainLayout';
 import UserLayout from './UserLayout';
 import MyProducts from '../components/MyProducts';
+import Spreadee from '../components/Spreadee';
 import UserInfo from '../components/UserInfo';
 import SignUp from '../components/SignUp';
 import SignIn from '../components/SignIn';
@@ -20,6 +21,7 @@ const App = () => (
 	<div>
     <Loading />
     <Switch>
+      <AppRoute exact path="/spreadee" layout={MainLayout} component={Spreadee} />
       <AppRoute exact path="/products" layout={MainLayout} component={Products} />
       <AppRoute exact path="/my_products" layout={MainLayout} component={MyProducts} />
       <AppRoute exact path="/user_info" layout={MainLayout} component={UserInfo} />

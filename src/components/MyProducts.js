@@ -21,6 +21,9 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import {
+  fetchMyProducts,
+} from "../actions/myProducts"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,16 +31,33 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MyProducts = () => {
+const MyProducts = ({fetchMyProducts, myProducts}) => {
   const classes = useStyles();
+  React.useEffect(() => {
+    fetchMyProducts()
+  }, [])
   return (
     <div>
       TODO: my product information here
+      {myProducts.map(product => product.id)}
     </div>
   )
 }
 
+const mapStateToProps = state => {
+  return { 
+    myProducts: state.myProducts.items,
+    currentUser: state.reduxTokenAuth.currentUser,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchMyProducts: () => dispatch(fetchMyProducts()),
+  }
+}
+
 export default connect(
-  null,
-  null,
+  mapStateToProps, 
+  mapDispatchToProps 
 )(MyProducts)

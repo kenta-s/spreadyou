@@ -10,7 +10,7 @@ class Tweet < ApplicationRecord
   enum status: {
     pending: 0,
     tweeted: 1,
-    not_found: 2,
+    cannot_be_found: 2,
   }
 
   private

@@ -15,7 +15,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 const MainListItems = ({history}) => {
   return(
     <div>
-      <ListItem button onClick={() => history.push('/products')}>
+      <ListItem button onClick={() => history.push('/spreadee')}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
