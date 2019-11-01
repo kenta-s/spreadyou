@@ -1,48 +1,69 @@
 import React from 'react';
 import { connect } from "react-redux"
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
 import {
   fetchMyProducts,
 } from "../actions/myProducts"
 
-const useStyles = makeStyles(theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+const useStyles = makeStyles({
   root: {
-    display: 'flex',
+    width: '100%',
+    overflowX: 'auto',
   },
-}));
+  table: {
+    minWidth: 650,
+  },
+});
 
 const MyProducts = ({fetchMyProducts, myProducts}) => {
   const classes = useStyles();
   React.useEffect(() => {
     fetchMyProducts()
   }, [])
+
+  const rows = myProducts
   return (
-    <div>
-      TODO: my product information here
-      {myProducts.map(product => product.id)}
-    </div>
+    <React.Fragment>
+    { rows.length === 0
+      ?
+      <div>
+        見つかりません
+      </div>
+      :
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>summary</TableCell>
+            <TableCell align="right">url</TableCell>
+            <TableCell align="right">created at</TableCell>
+            <TableCell align="right">tweeted</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map(row => (
+            <TableRow key={row.id}>
+              <TableCell component="th" scope="row">
+                {row.summary}
+              </TableCell>
+              <TableCell align="right">{row.url}</TableCell>
+              <TableCell align="right">{row.created_at}</TableCell>
+              <TableCell align="right">{row.tweets.length}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    }
+    </React.Fragment>
   )
 }
+
 
 const mapStateToProps = state => {
   return { 
