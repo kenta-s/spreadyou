@@ -22,49 +22,90 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import TextField from '@material-ui/core/TextField';
+
 import {
   fetchSpreadee,
 } from "../actions/spreadee"
+import {
+  postTweet,
+} from "../actions/tweets"
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 220,
+  },
 }));
 
-const Spreadee = ({fetchSpreadee, spreadee}) => {
+const Spreadee = ({fetchSpreadee, spreadee, postTweet}) => {
   const classes = useStyles();
+  const [tweetContent, setTweetContent] = React.useState('おすすめです')
+
   React.useEffect(() => {
     fetchSpreadee()
   }, [])
+
+  const suffixMessage = `${spreadee.url}\n\nスプレジュでサービスを広めませんか？\nhttps://ja.spreadyou.net`
+
   return (
     <div>
       {spreadee
         ?
         <React.Fragment>
           <p>{spreadee.summary}</p>
+          <Divider />
           <p>{spreadee.description}</p>
           <Link href={spreadee.url} target="_blank" rel="noopener">{spreadee.url}</Link>
+          <form Validate autoComplete="off">
+            <TextField
+              label="紹介文"
+              multiline
+              rows="6"
+              defaultValue=""
+              value={tweetContent}
+              onChange={(e) => {setTweetContent(e.target.value)}}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="ツイートのイメージ"
+              disabled
+              multiline
+              rows="6"
+              defaultValue=""
+              value={`${tweetContent}\n${suffixMessage}`}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+          </form>
           {
             spreadee.isSpread
             ?
             <Button
 			        disabled
               type="button"
-              fullWidth
               variant="contained"
               color="primary"
             >
-              Tweet済み
+              ツイート済み
             </Button>
             :
             <Button
               type="button"
-              fullWidth
               variant="contained"
               color="primary"
+              onClick={() => {
+                postTweet(spreadee.id, tweetContent)
+              }}
             >
-              Tweet
+              ツイート
             </Button>
           }
         </React.Fragment>
@@ -83,6 +124,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchSpreadee: () => dispatch(fetchSpreadee()),
+    postTweet: (productId, content) => dispatch(postTweet(productId, content)),
   }
 }
 

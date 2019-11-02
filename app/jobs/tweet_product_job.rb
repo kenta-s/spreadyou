@@ -1,5 +1,4 @@
 class TweetProductJob < ApplicationJob
-  # queue_as :default
   queue_as :tweet
 
   attr :tweet
@@ -17,13 +16,6 @@ class TweetProductJob < ApplicationJob
 
       text = 'ツイッター連携周りの機能テスト中です。ご迷惑をおかけしてますm(__)m'
       res = client.update(text)
-      # res.text
-      # => "ほげ"
-      # res.id.to_s
-      # => "1188355354834325506"
-      # res.url.to_s
-      # => "https://twitter.com/kenta_s_dev/status/1188355354834325506"
-      # @tweet = Tweet.new(tweet_params)
       tweet.update!(
         tweet_id_on_twitter: res.id.to_s,
         tweet_url: res.url.to_s,

@@ -1,5 +1,6 @@
 import {
   RECEIVE_SPREADEE,
+  TWEETED_SPREADEE,
 } from "../actionTypes";
 
 const initialState = {
@@ -21,6 +22,12 @@ const spreadee = (state = initialState, action) => {
         description,
         url,
         isSpread,
+      };
+    }
+    case TWEETED_SPREADEE: {
+      return {
+        ...state,
+        isSpread: true,
       };
     }
     default:
