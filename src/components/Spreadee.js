@@ -23,6 +23,7 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import TextField from '@material-ui/core/TextField';
+import Title from './Title';
 
 import {
   fetchSpreadee,
@@ -57,16 +58,14 @@ const Spreadee = ({fetchSpreadee, spreadee, postTweet}) => {
       {spreadee
         ?
         <React.Fragment>
-          <p>{spreadee.summary}</p>
-          <Divider />
+          <Title>{spreadee.summary}</Title>
           <p>{spreadee.description}</p>
           <Link href={spreadee.url} target="_blank" rel="noopener">{spreadee.url}</Link>
-          <form Validate autoComplete="off">
+          <form validate autoComplete="off">
             <TextField
               label="紹介文"
               multiline
               rows="6"
-              defaultValue=""
               value={tweetContent}
               onChange={(e) => {setTweetContent(e.target.value)}}
               className={classes.textField}
@@ -78,7 +77,6 @@ const Spreadee = ({fetchSpreadee, spreadee, postTweet}) => {
               disabled
               multiline
               rows="6"
-              defaultValue=""
               value={`${tweetContent}\n${suffixMessage}`}
               className={classes.textField}
               margin="normal"

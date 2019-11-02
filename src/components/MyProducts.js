@@ -11,8 +11,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Title from './Title';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import NewProductModal from './NewProductModal';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     overflowX: 'auto',
@@ -20,10 +24,16 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
-});
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+}));
 
 const MyProducts = ({fetchMyProducts, myProducts}) => {
   const classes = useStyles();
+  const [newProductModalIsOpen, setProductModalOpen] = React.useState(false);
   React.useEffect(() => {
     fetchMyProducts()
   }, [])
@@ -31,6 +41,7 @@ const MyProducts = ({fetchMyProducts, myProducts}) => {
   const rows = myProducts
   return (
     <React.Fragment>
+    <Title>自分のプロダクト</Title>
     { rows.length === 0
       ?
       <div>
@@ -60,13 +71,16 @@ const MyProducts = ({fetchMyProducts, myProducts}) => {
         </TableBody>
       </Table>
     }
+    <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => setProductModalOpen(true)}>
+      <AddIcon />
+    </Fab>
+    <NewProductModal open={newProductModalIsOpen} setOpen={setProductModalOpen} />
     </React.Fragment>
   )
 }
 
-
 const mapStateToProps = state => {
-  return { 
+  return {
     myProducts: state.myProducts.items,
     currentUser: state.reduxTokenAuth.currentUser,
   }
@@ -79,6 +93,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(
-  mapStateToProps, 
-  mapDispatchToProps 
+  mapStateToProps,
+  mapDispatchToProps
 )(MyProducts)
