@@ -45,6 +45,11 @@ const NewProductModal = ({open, setOpen, postMyProduct}) => {
   const handleSubmit = () => {
     handleClose()
     postMyProduct(summary, description, url)
+      .then(() => {
+        changeSummary('')
+        changeUrl('')
+        changeDescription('')
+      })
   }
 
   return (
@@ -64,7 +69,7 @@ const NewProductModal = ({open, setOpen, postMyProduct}) => {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2>プロダクトの情報を入力してください</h2>
-            <form className={classes.container} noValidate autoComplete="off">
+            <form className={classes.container} onSubmit={handleSubmit} noValidate autoComplete="off">
               <div>
                 <TextField
                   label="summary"
