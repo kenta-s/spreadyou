@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :tweets, dependent: :destroy
   has_many :products, dependent: :destroy
   has_one :status, dependent: :destroy
+  has_one :twitter_credential, dependent: :destroy
 
   # validates :name, presence: true, length: { minimum: 3, maximum: 20 }
 

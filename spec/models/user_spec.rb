@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:tweets).dependent(:destroy) }
     it { should have_many(:products).dependent(:destroy) }
     it { should have_one(:status).dependent(:destroy) }
+    it { should have_one(:twitter_credential).dependent(:destroy) }
   end
 
   describe "validations" do
