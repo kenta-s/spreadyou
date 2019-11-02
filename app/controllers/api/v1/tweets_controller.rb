@@ -18,6 +18,7 @@ class Api::V1::TweetsController < ApplicationController
       content: tweet_params.dig(:content),
     )
     if @tweet.save
+      TweetProductJob.perform_later(tweet_id: @tweet.id)
       render :show, status: :created
     else
       render json: {}, status: :unprocessable_entity

@@ -12,6 +12,12 @@ class User < ActiveRecord::Base
   has_one :status, dependent: :destroy
   has_one :twitter_credential, dependent: :destroy
 
+  # def twitter_access_token
+  delegate :access_token, to: :twitter_credential, prefix: 'twitter'
+
+  # def twitter_secret_token
+  delegate :secret_token, to: :twitter_credential, prefix: 'twitter'
+
   # validates :name, presence: true, length: { minimum: 3, maximum: 20 }
 
   def gain_sp_point!(point)
@@ -33,18 +39,6 @@ class User < ActiveRecord::Base
       return 0
     else
       self.status.spread_point
-    end
-  end
-
-  # http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=http://localhost:5000/twitter_connected
-  #
-  # http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=http://127.0.0.1:3000/api/v1/auth/:provider/callback
-  def twitter_client
-    @twitter_client ||= Twitter::REST::Client.new do |config|
-      config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
-      config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
-      # config.access_token        = "YOUR_ACCESS_TOKEN"
-      # config.access_token_secret = "YOUR_ACCESS_SECRET"
     end
   end
 end
