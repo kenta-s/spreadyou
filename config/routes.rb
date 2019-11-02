@@ -6,14 +6,14 @@ Rails.application.routes.draw do
   }
   mount Sidekiq::Web => '/sidekiq'
 
-  resources :spreadee, only: [:index]
-  resources :products, only: [:index, :show]
-  resources :my_products, only: [:index, :show]
-  resources :user_info, only: [:index]
-  resources :signin, only: [:index]
-  resources :signup, only: [:index]
+  # resources :spreadee, only: [:index]
+  # resources :products, only: [:index, :show]
+  # resources :my_products, only: [:index, :show]
+  # resources :user_info, only: [:index]
+  # resources :signin, only: [:index]
+  # resources :signup, only: [:index]
 
-  resources :twitter_auth_callbacks, only: [:index]
+  # resources :twitter_auth_callbacks, only: [:index]
 
   namespace :api, { format: 'json' } do
     namespace :v1 do

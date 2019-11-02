@@ -28,7 +28,7 @@ const config = {
         test: /\.(js)$/,
         loaders: 'babel-loader',
         query: {
-          presets: ['@babel/preset-react', '@babel/preset-env'],
+          presets: ['@babel/preset-react', '@babel/preset-env', '@babel/plugin-syntax-dynamic-import'],
         }
       },
       {
@@ -87,7 +87,12 @@ const serverConfig = mode => {
     node: {
       __filename: false,
       __dirname: false,
-    }
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        isServer: JSON.stringify(true),
+      }),
+    ]
   })
 }
 
@@ -126,8 +131,8 @@ const clientConfig = {
 module.exports = (env, argv) => {
   const mode = argv.mode === 'production' ? 'production' : 'development'
   return [
-    mainConfig(mode),
-    // serverConfig,
-    // clientConfig,
+    // mainConfig(mode),
+    serverConfig(mode),
+    clientConfig,
   ]
 }
