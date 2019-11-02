@@ -7,6 +7,7 @@ import spreadee from './spreadee'
 import myProducts from './myProducts'
 import myProduct from './myProduct'
 import tweets from './tweets'
+import userInfo from './userInfo'
 
 export default (history) => combineReducers({
   reduxTokenAuth: reduxTokenAuthReducer,
@@ -17,4 +18,5 @@ export default (history) => combineReducers({
   myProducts,
   myProduct,
   tweets,
+  userInfo,
 });
