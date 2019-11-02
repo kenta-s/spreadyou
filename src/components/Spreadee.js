@@ -40,11 +40,11 @@ const Spreadee = ({fetchSpreadee, spreadee}) => {
   return (
     <div>
       {spreadee
-        ? 
+        ?
         <React.Fragment>
           <p>{spreadee.summary}</p>
           <p>{spreadee.description}</p>
-          <p>{spreadee.url}</p>
+          <Link href={spreadee.url} target="_blank" rel="noopener">{spreadee.url}</Link>
           {
             spreadee.isSpread
             ?
