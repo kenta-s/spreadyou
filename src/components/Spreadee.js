@@ -75,7 +75,7 @@ const Spreadee = ({fetchSpreadee, spreadee}) => {
 }
 
 const mapStateToProps = state => {
-  return { 
+  return {
     spreadee: state.spreadee,
   }
 };
@@ -87,6 +87,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(
-  mapStateToProps, 
-  mapDispatchToProps 
+  mapStateToProps,
+  mapDispatchToProps
 )(Spreadee)

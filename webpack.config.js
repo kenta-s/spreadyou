@@ -93,9 +93,10 @@ const serverConfig = mode => {
 
 const mainConfig = mode => {
   return Object.assign({}, config, {
-    entry: {
-      main: './client.js',
-    },
+    entry: [
+      "@babel/polyfill",
+      './client.js'
+    ],
   })
 }
 
