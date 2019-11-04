@@ -17,12 +17,20 @@ export const finishLoading = () => ({
   type: LOADING_FINISH
 })
 
-export const signIn = async ({authToken, uid, client, expiry}) => {
+export const setTokens = async ({authToken, uid, client, expiry}) => {
   localStorage.setItem("access-token", authToken)
   localStorage.setItem("uid", uid)
   localStorage.setItem("token-type", "Bearer")
   localStorage.setItem("client", client)
   localStorage.setItem("expiry", expiry)
 
-  return await verifyCredentials(store)
+  return true
+}
+
+export const signIn = async ({authToken, uid, client, expiry}) => {
+  setTokens({authToken, uid, client, expiry})
+    .then(() => {
+        return verifyCredentials(store)
+      }
+    )
 }

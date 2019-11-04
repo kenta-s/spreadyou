@@ -58,7 +58,7 @@ const UserLayout = ({history, currentUser, ...props}) => {
 
   React.useEffect(() => {
     if(currentUser.isSignedIn){
-      history.push('/products')
+      history.push('/spreadee')
     }
   })
 
@@ -76,10 +76,10 @@ const UserLayout = ({history, currentUser, ...props}) => {
       </Box>
     </Container>
   );
-} 
+}
 
 const mapStateToProps = state => {
-  return { 
+  return {
     currentUser: state.reduxTokenAuth.currentUser,
   }
 };

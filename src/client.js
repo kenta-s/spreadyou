@@ -4,7 +4,15 @@ import { ConnectedRouter } from 'connected-react-router'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import App from './containers/App'
-import store, { history } from './store'
+import store from './store'
+import { createBrowserHistory, createMemoryHistory } from 'history';
+
+let history
+if(isServer){
+  history = createMemoryHistory();
+}else{
+  history = createBrowserHistory();
+}
 // import counterApp from './reducers'
 
 // import store, { history } from './defaultStore'

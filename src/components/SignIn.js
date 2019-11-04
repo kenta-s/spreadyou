@@ -93,7 +93,7 @@ const SignIn = ({history}) => {
 			</p>
 
       <Button
-			  href="http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=http://127.0.0.1:3000/twitter_auth_callbacks"
+			  href="http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=http://127.0.0.1:5000/twitter_auth_callbacks"
         fullWidth
         variant="contained"
         color="primary"

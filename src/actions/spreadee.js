@@ -16,6 +16,7 @@ const receiveSpreadee = payload => ({
 
 export function fetchSpreadee() {
   const instance = axios.create({
+    baseURL: 'http://localhost:3000',
     headers: {
       "access-token": localStorage.getItem('access-token'),
       "token-type":   "Bearer",

@@ -29,3 +29,5 @@
 /public/dist/*
 
 /config/*/*.key
+
+/config/credentials/development.key

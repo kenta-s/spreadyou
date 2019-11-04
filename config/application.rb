@@ -38,7 +38,7 @@ module Spreadyou
       g.routing_specs false
       g.controller_specs false
     end
-    
+
     # config.api_only = true
 
     # for omniauth
@@ -47,5 +47,14 @@ module Spreadyou
     config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
 
     config.active_job.queue_adapter = :sidekiq
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins "*"
+        resource "*",
+          headers: :any,
+					expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+          methods: [:get, :post, :options, :head, :put, :delete]
+      end
+    end
   end
 end

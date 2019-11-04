@@ -28,7 +28,16 @@ const config = {
         test: /\.(js)$/,
         loaders: 'babel-loader',
         query: {
-          presets: ['@babel/preset-react', '@babel/preset-env', '@babel/plugin-syntax-dynamic-import'],
+          presets: [
+            ['@babel/preset-react'],
+            [
+              '@babel/preset-env', {
+                "targets": {
+                  "node": "current"
+                }
+              }
+            ]
+          ],
         }
       },
       {
@@ -121,11 +130,25 @@ const clientConfig = {
         test: /\.(js)$/,
         loaders: 'babel-loader',
         query: {
-          presets: ['@babel/preset-react', '@babel/preset-env'],
+          presets: [
+            ['@babel/preset-react'],
+            [
+              '@babel/preset-env', {
+                "targets": {
+                  "node": "current"
+                }
+              }
+            ]
+          ],
         }
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      isServer: JSON.stringify(false),
+    }),
+  ]
 }
 
 module.exports = (env, argv) => {

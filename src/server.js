@@ -7,9 +7,17 @@ import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
 import { createStore } from "redux";
 // import counterApp from './reducers'
-import store, { history } from './defaultStore'
+import store from './store'
 import App from './containers/App'
 // import Dashboard from './containers/Dashboard/index'
+import { createBrowserHistory, createMemoryHistory } from 'history';
+
+let history
+if(isServer){
+  history = createMemoryHistory();
+}else{
+  history = createBrowserHistory();
+}
 
 const app = Express()
 const port = 5000

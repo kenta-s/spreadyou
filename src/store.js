@@ -1,25 +1,20 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import createRootReducer from "./reducers";
 import thunkMiddleware from "redux-thunk";
-// import { createBrowserHistory } from 'history';
-// import { createMemoryHistory } from 'history';
-import 'history';
 import { routerMiddleware } from 'connected-react-router';
 import { middleware as flashMiddleware } from 'redux-flash'
 import { createLogger } from "redux-logger";
 import { verifyCredentials } from './redux-token-auth-config'
+import { createBrowserHistory, createMemoryHistory } from 'history';
 
-const loggerMiddleware = createLogger()
-
+let history
 if(isServer){
-  // export const history = history.createBrowserHistory();
-  const history = 'aaaaa'
+  history = createMemoryHistory();
 }else{
-  const history = history.createBrowserHistory();
+  history = createBrowserHistory();
 }
 
-export history
-
+const loggerMiddleware = createLogger()
 const flashOptions = { timeout: 3000 }
 
 const store = createStore(
@@ -34,6 +29,8 @@ const store = createStore(
   )
 );
 
-verifyCredentials(store)
+if(!isServer){
+  verifyCredentials(store)
+}
 
 export default store
